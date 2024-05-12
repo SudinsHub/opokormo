@@ -54,18 +54,36 @@ class MaxHeap{
     } 
 };
 
+void heapify(int arr[], int size){
+    for (int i = size - 1; i >= 0; i--) {
+        if (2*i + 1 >= size) continue; // Leaf nodes are always heapified
+        int j = i;
+        while (2*j + 1 < size) {
+            int largerChildInd = (2*j + 2 < size && arr[2*j + 2] > arr[2*j + 1]) ? (2*j + 2) : (2*j + 1);
+            if (arr[j] < arr[largerChildInd]) {
+                swap(arr[j], arr[largerChildInd]);
+                j = largerChildInd;
+            } else break;
+        }
+    }
+}
+
 int main(){
     MaxHeap* mh = new MaxHeap();
 
-    mh->insert(15);
-    mh->insert(5);
-    mh->insert(10);
-    mh->insert(7);
-    mh->insert(10);
-    mh->insert(35);
-    mh->print();
-    mh->heapSort();
-    // mh->extractMax();
-    mh->printSorted();
+    // mh->insert(15);
+    // mh->insert(5);
+    // mh->insert(10);
+    // mh->insert(7);
+    // mh->insert(10);
+    // mh->insert(35);
+    // mh->print();
+    // mh->heapSort();
+    // // mh->extractMax();
+    // mh->printSorted();
+    int arr[] = {1, 2, 3, 4, 5, 6, 7, 8};
+    heapify(arr, sizeof(arr)/sizeof(arr[0]));
+    for(int x : arr) cout << x << " ";
     return 0;
 }
+
